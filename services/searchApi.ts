@@ -15,7 +15,7 @@ export default {
     genre: string,
     startYear: string | number,
     endYear: string | number,
-    cateogrie: number | string
+    cateogrie: number | string | null
   ) {
     return $fetch(`${baseUrl}/search/`, {
       method: "GET",

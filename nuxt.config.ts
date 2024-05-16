@@ -9,6 +9,9 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxtjs/seo",
   ],
+  build: {
+    transpile: ["vue-toastification"],
+  },
   css: ["@/assets/scss/main.scss"],
   app: {
     head: {
@@ -23,6 +26,5 @@ export default defineNuxtConfig({
     description:
       "PandaTV.uz - har qanday didga mos keluvchi keng kontent tanloviga ega bo'lgan ko'ngilochar platforma.",
     defaultLocale: "uz",
-    
   },
 });

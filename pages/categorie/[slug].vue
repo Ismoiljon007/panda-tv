@@ -168,13 +168,15 @@
           <div class="category__main-top">
             <h2 class="category__title">{{ categorieName }}</h2>
             <div class="pagination">
-              <vue-awesome-paginate
-                :total-items="categorieMovies?.pagination?.total_pages"
-                :items-per-page="1"
-                :max-pages-shown="3"
-                v-model="currentPage"
-                :on-click="onClickHandler"
-              />
+              <ClientOnly>
+                <vue-awesome-paginate
+                  :total-items="categorieMovies?.pagination?.total_pages"
+                  :items-per-page="1"
+                  :max-pages-shown="3"
+                  v-model="currentPage"
+                  :on-click="onClickHandler"
+                />
+              </ClientOnly>
             </div>
           </div>
           <ClienOnly>
@@ -182,11 +184,13 @@
               class="category__items"
               v-if="categorieMovies?.content?.length"
             >
-              <movie-card
-                v-for="item in categorieMovies?.content"
-                :movie="item"
-                :key="item"
-              />
+              <ClientOnly>
+                <movie-card
+                  v-for="item in categorieMovies?.content"
+                  :movie="item"
+                  :key="item"
+                />
+              </ClientOnly>
             </div>
           </ClienOnly>
           <div
@@ -199,13 +203,15 @@
             </h2>
           </div>
           <div class="main-pagination">
-            <vue-awesome-paginate
-              :total-items="categorieMovies?.pagination?.total_pages"
-              :items-per-page="1"
-              :max-pages-shown="3"
-              v-model="currentPage"
-              @click="onClickHandler"
-            />
+            <ClientOnly>
+              <vue-awesome-paginate
+                :total-items="categorieMovies?.pagination?.total_pages"
+                :items-per-page="1"
+                :max-pages-shown="3"
+                v-model="currentPage"
+                @click="onClickHandler"
+              />
+            </ClientOnly>
           </div>
         </div>
       </div>

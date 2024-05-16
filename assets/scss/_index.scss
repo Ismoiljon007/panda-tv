@@ -388,7 +388,7 @@
         );
     }
     .container {
-      max-width: 100%;
+      max-width: 100% !important;
       position: absolute;
       bottom: 50%;
       transform: translateY(60%);

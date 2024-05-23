@@ -242,6 +242,43 @@ const currentPage = ref<any>(
   route.query.page ? parseInt(route.query.page, 10) : 1
 );
 
+const title: string =
+  "PandaTV.uz - Sevimli kontentingizni tomosha qiling va efirga uzating";
+const description: string =
+  "PandaTV.uz sizning barcha oʻyin-kulgi ehtiyojlaringiz uchun bir platformaningizdir. Jonli efirlarni tomosha qiling, keng koʻlamli shoular va filmlar kutubxonasiga koʻring va har kuni yangi kontentni kashf eting.";
+const keywords: any = [
+  "pandatv",
+  "o'zbek kinolar",
+  "uzbekistan",
+  "streaming",
+  "live tv",
+  "movies",
+  "shows",
+  slug,
+];
+const telegramTitle = "PandaTV.uz - Sizning oʻyin-kulgi markazingiz";
+const telegramUrl: string = "https://t.me/azamataxrorov1";
+const telegramImage: string = "/favicon.ico";
+
+useHead({
+  title: slug,
+  meta: [
+    { name: "description", content: description },
+    { name: "keywords", content: keywords.join(", ") },
+    { property: "og:title", content: slug },
+    { property: "og:description", content: description },
+    { property: "og:url", content: "https://pandatv.uz" },
+    { property: "og:site_name", content: "PandaTV.uz" },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: slug },
+    { name: "twitter:description", content: description },
+    { name: "telegram:title", content: telegramTitle },
+    { name: "telegram:url", content: telegramUrl },
+    { name: "telegram:image", content: telegramImage },
+  ],
+});
+
 let page = ref(10);
 let totalPages = 20;
 

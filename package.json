@@ -35,5 +35,10 @@
     "vue-toastification": "2.0.0-rc.5",
     "vue3-google-login": "2.0.26",
     "vue3-otp-input": "0.4.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

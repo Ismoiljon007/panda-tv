@@ -1,76 +1,115 @@
 <template>
-  <div class="overlay" v-if="store.overlay" @click="store.overlay = false, store.search_open = false"></div>
+  <div
+    class="overlay"
+    v-if="store.overlay"
+    @click="(store.overlay = false), (store.search_open = false)"
+  ></div>
   <NuxtLayout />
   <loading />
 </template>
 <script setup lang="ts">
-import { useStore } from './store/store';
-import { useAuthStore } from "./store/auth"
-const store = useStore()
-const authStore = useAuthStore()
-const route = useRoute()
+import { useStore } from "./store/store";
+import { useAuthStore } from "./store/auth";
+const store = useStore();
+const authStore = useAuthStore();
+const route = useRoute();
 
-watch(() => route.path, (newPath: any, oldPath: any) => {
-  if (process.client) {
-    const html = document.querySelector<any>('html')
+const title: string =
+  "PandaTV.uz - Sevimli kontentingizni tomosha qiling va efirga uzating";
+const description: string =
+  "PandaTV.uz sizning barcha oʻyin-kulgi ehtiyojlaringiz uchun bir platformaningizdir. Jonli efirlarni tomosha qiling, keng koʻlamli shoular va filmlar kutubxonasiga koʻring va har kuni yangi kontentni kashf eting.";
+const keywords: any = [
+  "pandatv",
+  "o'zbek kinolar",
+  "uzbekistan",
+  "streaming",
+  "live tv",
+  "movies",
+  "shows",
+];
+const telegramTitle = "PandaTV.uz - Sizning oʻyin-kulgi markazingiz";
+const telegramUrl: string = "https://t.me/azamataxrorov1";
+const telegramImage: string = "/favicon.ico";
 
-    // Check both conditions before setting overflow
-    if (store.loader || store.search_open) {
-      html.style.overflow = 'hidden'
-    } else {
-      html.style.overflow = 'visible'
-    }
+useHead({
+  title: title,
+  meta: [
+    { name: "description", content: description },
+    { name: "keywords", content: keywords.join(", ") },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: "https://pandatv.uz" },
+    { property: "og:site_name", content: "PandaTV.uz" },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "telegram:title", content: telegramTitle },
+    { name: "telegram:url", content: telegramUrl },
+    { name: "telegram:image", content: telegramImage },
+  ],
+});
 
-    // Only focus when search_open is true
-    if (store.search_open) {
-      setTimeout(() => {
-        document.getElementById('search-int')?.focus()
-      }, 1000)
+watch(
+  () => route.path,
+  (newPath: any, oldPath: any) => {
+    if (process.client) {
+      const html = document.querySelector<any>("html");
+
+      // Check both conditions before setting overflow
+      if (store.loader || store.search_open) {
+        html.style.overflow = "hidden";
+      } else {
+        html.style.overflow = "visible";
+      }
+
+      // Only focus when search_open is true
+      if (store.search_open) {
+        setTimeout(() => {
+          document.getElementById("search-int")?.focus();
+        }, 1000);
+      }
     }
   }
-})
+);
 onMounted(() => {
   if (process.client) {
-    const html = document.querySelector<any>('html')
+    const html = document.querySelector<any>("html");
 
     // Check both conditions before setting overflow
     if (store.loader || store.search_open) {
-      html.style.overflow = 'hidden'
+      html.style.overflow = "hidden";
     } else {
-      html.style.overflow = 'visible'
+      html.style.overflow = "visible";
     }
 
     // Only focus when search_open is true
     if (store.search_open) {
       setTimeout(() => {
-        document.getElementById('search-int')?.focus()
-      }, 1000)
+        document.getElementById("search-int")?.focus();
+      }, 1000);
     }
   }
-})
-
+});
 
 watchEffect(() => {
   if (process.client) {
     const item: string | null | undefined = localStorage.getItem("token");
-    authStore.token = item
-      ? JSON.parse(item)
-      : null
-    const html = document.querySelector<any>('html')
+    authStore.token = item ? JSON.parse(item) : null;
+    const html = document.querySelector<any>("html");
     // Check both conditions before setting overflow
     if (store.loader || store.search_open) {
-      html.style.overflow = 'hidden'
+      html.style.overflow = "hidden";
     } else {
-      html.style.overflow = 'visible'
+      html.style.overflow = "visible";
     }
 
     // Only focus when search_open is true
     if (store.search_open) {
       setTimeout(() => {
-        document.getElementById('search-int')?.focus()
-      }, 1000)
+        document.getElementById("search-int")?.focus();
+      }, 1000);
     }
   }
-})
-
+});
 </script>

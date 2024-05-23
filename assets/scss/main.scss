@@ -2,7 +2,9 @@
 @import "varibles";
 @import "mixins";
 @import "extends";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   margin: 0;
   padding: 0;

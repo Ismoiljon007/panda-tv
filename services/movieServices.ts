@@ -11,14 +11,14 @@ interface CommentBody {
 
 interface userWatchDataBody {
   user_id: number | string;
-  content_id: number | string;
+  content_id: number | string | null;
   watch_duration: number;
   content_type: string;
 }
 
 interface userActivityDataBody {
   user_id: number | string;
-  content_id: number | string;
+  content_id: number | string | null;
   timestamp: number;
   content_type: string;
   activity_type: string;

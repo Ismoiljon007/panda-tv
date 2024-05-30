@@ -507,8 +507,13 @@ const keywords: any = [
   "live tv",
   "movies",
   "shows",
+  "panda",
+  "panda-tv",
+  "Azamat Axrorov",
+  "panda tv",
+  "Mening sevgilim ayg'oqchi",
 ];
-const telegramTitle = "PandaTV.uz - Sizning oʻyin-kulgi markazingiz";
+const telegramTitle = "PandaTV.uz - O‘zbek Filmlari Onlayn";
 const telegramUrl: string = "https://t.me/azamataxrorov1";
 const telegramImage: string = "/favicon.ico";
 async function fetchData() {

@@ -14,10 +14,9 @@ const store = useStore();
 const authStore = useAuthStore();
 const route = useRoute();
 
-const title: string =
-  "PandaTV.uz - Sevimli kontentingizni tomosha qiling va efirga uzating";
+const title: string = "PandaTV.uz - O'zbek Filmlari Onlayn";
 const description: string =
-  "PandaTV.uz sizning barcha oʻyin-kulgi ehtiyojlaringiz uchun bir platformaningizdir. Jonli efirlarni tomosha qiling, keng koʻlamli shoular va filmlar kutubxonasiga koʻring va har kuni yangi kontentni kashf eting.";
+  "PandaTV.uz da eng yangi va klassik o'zbek filmlarini onlayn tomosha qiling. O'zbek kinosi ixlosmandlari uchun ajoyib tanlov.";
 const keywords: any = [
   "pandatv",
   "o'zbek kinolar",
@@ -26,10 +25,15 @@ const keywords: any = [
   "live tv",
   "movies",
   "shows",
+  "panda",
+  "panda-tv",
+  "Azamat Axrorov",
+  "panda tv",
+  "Mening sevgilim ayg'oqchi",
 ];
-const telegramTitle = "PandaTV.uz - Sizning oʻyin-kulgi markazingiz";
+const telegramTitle = "PandaTV.uz - O'zbek Filmlari Onlayn";
 const telegramUrl: string = "https://t.me/azamataxrorov1";
-const telegramImage: string = "/favicon.ico";
+const telegramImage: string = "/panda-icon-2.png";
 
 useHead({
   title: title,

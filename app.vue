@@ -80,7 +80,7 @@ onMounted(() => {
   if (process.client) {
     const html = document.querySelector<any>("html");
     const item: string | null | undefined = localStorage.getItem("token");
-    authStore.token = item ? JSON.parse(item) : null;
+    authStore.token = item ? item : null;
     // Check both conditions before setting overflow
     if (store.loader || store.search_open) {
       html.style.overflow = "hidden";
@@ -99,8 +99,9 @@ onMounted(() => {
 
 watchEffect(() => {
   if (process.client) {
-    const item: string | null | undefined = localStorage.getItem("token");
-    authStore.token = item ? JSON.parse(item) : null;
+    authStore.token = localStorage.getItem("token")
+      ? localStorage.getItem("token")
+      : null;
     const html = document.querySelector<any>("html");
     // Check both conditions before setting overflow
     if (store.loader || store.search_open) {

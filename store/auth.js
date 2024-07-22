@@ -27,7 +27,7 @@ export const useAuthStore = defineStore({
         .verificationCode(this.phoneNumber, String(code), info)
         .then((response) => {
           this.token = response?.access_token;
-          localStorage.setItem("token", JSON.stringify(this.token));
+          localStorage.setItem("token", this.token);
           router.push("/");
         })
         .catch((error) => {
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore({
         .loginWithEmail(loginForm)
         .then((response) => {
           this.token = response?.access_token;
-          localStorage.setItem("token", JSON.stringify(this.token));
+          localStorage.setItem("token", this.token);
           if (response?.access_token) {
             useToast().success("profilingizga muvafaqiyatli kirdingiz", {
               timeout: 2000,

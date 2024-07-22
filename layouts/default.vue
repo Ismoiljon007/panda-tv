@@ -427,7 +427,9 @@ const updateScroll = () => {
   scrolledNav.value = false;
 };
 onMounted(() => {
-  getUserInfo();
+  if (authStore.token) {
+    getUserInfo();
+  }
   getSavedMovies();
   getCategorys();
   window.addEventListener("click", (e: any) => {

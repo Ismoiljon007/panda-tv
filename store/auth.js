@@ -64,6 +64,7 @@ export const useAuthStore = defineStore({
           this.token = null;
           localStorage.removeItem("token");
           router.push("/");
+          window.location.reload(true);
         })
         .catch((error) => {
           throw error;

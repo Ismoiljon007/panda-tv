@@ -327,9 +327,6 @@ async function getMegogoFilms() {
     console.log(err);
   }
 }
-await getMegogoFilms();
-await getCategoryMovies();
-await getBanners();
 
 const muted = ref<boolean>(true);
 const curentId = ref(0);
@@ -352,8 +349,16 @@ function onSlideChange(swiper: any) {
     videoPlayers[swiper.activeIndex].play();
   }
 }
-
+watch(
+  () => store.categories,
+  () => {
+    getCategoryMovies();
+  }
+);
 onMounted(() => {
+  getMegogoFilms();
+  getCategoryMovies();
+  getBanners();
   document.querySelectorAll(".hero__video").forEach((videoElement) => {
     const videoPlayer = videojs(videoElement);
     videoPlayer.muted(true);

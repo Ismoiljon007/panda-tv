@@ -365,18 +365,27 @@ async function getCategorys() {
   const data = await categorys.getCategorys();
   store.categories = data;
 }
-async function getUserInfo() {
+async function getUserInfo(): Promise<void> {
   try {
-    if (authStore.token) {
-      store.loader = true;
-      const data: any = await userInfo.getUserInfo(authStore.token);
+    if (!authStore.token) {
+      return authStore.logout();
+    }
+
+    store.loader = true;
+    const data: any = await userInfo.getUserInfo(authStore.token);
+
+    if (data?.status === "success") {
       store.userInfo = data?.data;
-      store.loader = false;
+    } else {
+      authStore.logout();
     }
   } catch (err) {
     authStore.logout();
+  } finally {
+    store.loader = false;
   }
 }
+
 async function getSavedMovies() {
   const data: any = await services.getSavedMovies(authStore.token);
   store.savedMovies = data;

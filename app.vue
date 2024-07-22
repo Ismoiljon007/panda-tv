@@ -79,7 +79,8 @@ watch(
 onMounted(() => {
   if (process.client) {
     const html = document.querySelector<any>("html");
-
+    const item: string | null | undefined = localStorage.getItem("token");
+    authStore.token = item ? JSON.parse(item) : null;
     // Check both conditions before setting overflow
     if (store.loader || store.search_open) {
       html.style.overflow = "hidden";

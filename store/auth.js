@@ -54,7 +54,7 @@ export const useAuthStore = defineStore({
         });
     },
     async logout() {
-      await this.$fetch(`${this.baseUrl}/auth/logout`, {
+      await $fetch(`${this.baseUrl}/auth/logout`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + this.token,

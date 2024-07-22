@@ -28,7 +28,7 @@ export const useAuthStore = defineStore({
         .then((response) => {
           this.token = response?.access_token;
           localStorage.setItem("token", this.token);
-          router.push("/");
+          window.location.href = "/";
         })
         .catch((error) => {
           throw error;
@@ -44,6 +44,7 @@ export const useAuthStore = defineStore({
             useToast().success("profilingizga muvafaqiyatli kirdingiz", {
               timeout: 2000,
             });
+            window.location.reload(true)
             window.location.href = "/";
           } else {
             useToast().warning("Iltimos qaytatdan urinib ko'ring!");

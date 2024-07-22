@@ -63,7 +63,7 @@ export const useAuthStore = defineStore({
         .then(() => {
           this.token = null;
           localStorage.removeItem("token");
-          router.push("/");
+          window.location.href = "/";
           window.location.reload(true);
         })
         .catch((error) => {

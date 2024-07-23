@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 import authServices from "~/services/authServices";
-const router = useRouter();
 
 export const useAuthStore = defineStore({
   id: "auth",
@@ -44,7 +43,7 @@ export const useAuthStore = defineStore({
             useToast().success("profilingizga muvafaqiyatli kirdingiz", {
               timeout: 2000,
             });
-            window.location.reload(true)
+            window.location.reload(true);
             window.location.href = "/";
           } else {
             useToast().warning("Iltimos qaytatdan urinib ko'ring!");
@@ -55,6 +54,11 @@ export const useAuthStore = defineStore({
         });
     },
     async logout() {
+      setTimeout(() => {
+        localStorage.clear();
+        window.location.href = "/";
+        window.location.reload(true);
+      }, 5000);
       await $fetch(`${this.baseUrl}/auth/logout`, {
         method: "POST",
         headers: {
@@ -62,8 +66,7 @@ export const useAuthStore = defineStore({
         },
       })
         .then(() => {
-          this.token = null;
-          localStorage.removeItem("token");
+          localStorage.clear();
           window.location.href = "/";
           window.location.reload(true);
         })

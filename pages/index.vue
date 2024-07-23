@@ -161,10 +161,10 @@
           :slides-per-view="'auto'"
           :space-between="30"
           :breakpoints="{
-            '650': {
+            650: {
               spaceBetween: 30,
             },
-            '0': {
+            0: {
               spaceBetween: 10,
             },
           }"
@@ -209,10 +209,10 @@
           :slides-per-view="'auto'"
           :space-between="30"
           :breakpoints="{
-            '650': {
+            650: {
               spaceBetween: 30,
             },
-            '0': {
+            0: {
               spaceBetween: 10,
             },
           }"
@@ -321,8 +321,10 @@ async function getCategoryMovies() {
 }
 async function getMegogoFilms() {
   try {
+    store.loader = true;
     const data: any = await categorys.getMegogoFilms(14, 1);
     megogoMovies.value = data;
+    store.loader = false;
   } catch (err) {
     console.log(err);
   }
@@ -357,7 +359,6 @@ watch(
 );
 onMounted(() => {
   getMegogoFilms();
-  getCategoryMovies();
   getBanners();
   document.querySelectorAll(".hero__video").forEach((videoElement) => {
     const videoPlayer = videojs(videoElement);

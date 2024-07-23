@@ -170,11 +170,7 @@
       <ul class="search-list" v-if="searchData?.length">
         <li v-for="item in searchData" :key="item">
           <NuxtLink
-            @click="
-              (store.search_open = false),
-                (store.overlay = false),
-                (searchData = [])
-            "
+            @click="searchListItem()"
             :to="
               item?.is_mobile_only == true
                 ? '/only-on-mobile'
@@ -361,34 +357,47 @@ const router = useRouter();
 const menu = ref<boolean>(false);
 const profile = ref<boolean>(false);
 
+function searchListItem() {
+  (store.search_open = false), (store.overlay = false), (searchData.value = []);
+}
+
 async function getCategorys() {
   const data = await categorys.getCategorys();
   store.categories = data;
 }
 async function getUserInfo(): Promise<void> {
-  try {
-    if (!authStore.token) {
-      return authStore.logout();
-    }
+  if (authStore.token) {
+    try {
+      store.loader = true;
+      setTimeout(() => {
+        if (!store.userInfo?.username) {
+          authStore.logout();
+        }
+      }, 2000);
+      const data: any = await userInfo.getUserInfo(authStore.token);
 
-    store.loader = true;
-    const data: any = await userInfo.getUserInfo(authStore.token);
-
-    if (data?.status === "success") {
-      store.userInfo = data?.data;
-    } else {
+      if (data?.status === "success") {
+        store.userInfo = data?.data;
+      } else {
+        authStore.logout();
+      }
+    } catch (err) {
       authStore.logout();
+    } finally {
+      store.loader = false;
     }
-  } catch (err) {
-    authStore.logout();
-  } finally {
-    store.loader = false;
   }
 }
 
 async function getSavedMovies() {
-  const data: any = await services.getSavedMovies(authStore.token);
-  store.savedMovies = data;
+  try {
+    if (authStore.token) {
+      const data: any = await services.getSavedMovies(authStore.token);
+      store.savedMovies = data;
+    }
+  } catch (err) {
+    authStore.logout();
+  }
 }
 
 const searchEvent = ref<string>("");

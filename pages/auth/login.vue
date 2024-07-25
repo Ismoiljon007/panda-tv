@@ -50,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+import authServices from "~/services/authServices";
+
 import { googleTokenLogin, googleOneTap } from "vue3-google-login";
 import { useToast } from "vue-toastification";
 import { useStore } from "~~/store/store";
@@ -58,7 +60,7 @@ import { useSessionData } from "~/composables/useSessionData";
 definePageMeta({
   layout: "without",
 });
-const router = useRouter();
+const router = useRouter<any>();
 const store = useStore();
 const authStore = useAuthStore();
 store.loader = true;
@@ -90,19 +92,16 @@ const login = async () => {
     p.split("_").join("").length == 14
       ? p.split("_").join("").slice(0, -1)
       : p.split("_").join("");
-  const data: any = await authStore.loginWithPhone(tel.split("+").join(""));
-  try {
-    if (data.status == "success") {
-      router.push("/auth/verifycode/");
-    } else {
-      useToast().warning("Raqamda xatolik bor!");
-    }
-  } catch (err) {
+  const data: any = await authServices.loginWithPhone(tel.split("+").join(""));
+  if (data.status == "success") {
+    authStore.phoneNumber = tel.split("+").join("");
+    router.push("/auth/verifycode/");
+  } else {
     useToast().warning("Raqamda xatolik bor!");
   }
 };
 
-const phoneNumber = ref("");
+const phoneNumber = ref<string>("");
 
 const mask = (event: any) => {
   let keyCode;

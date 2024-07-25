@@ -234,6 +234,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from "vue";
 import index from "~/services/index";
 import categorys from "~/services/categorys";
 import videojs from "video.js";
@@ -358,6 +359,9 @@ watch(
   }
 );
 onMounted(() => {
+  if (store.categories?.data) {
+    getCategoryMovies();
+  }
   getMegogoFilms();
   getBanners();
   document.querySelectorAll(".hero__video").forEach((videoElement) => {

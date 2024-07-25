@@ -120,10 +120,10 @@
             />
           </svg>
         </button>
-        <button class="hero__left" v-if="banners?.data?.length > 1">
+        <button class="hero__left" v-show="banners?.data?.length > 1">
           <img src="@/assets/images/svg/left.svg" alt="" />
         </button>
-        <button class="hero__right" v-if="banners?.data?.length > 1">
+        <button class="hero__right" v-show="banners?.data?.length > 1">
           <img src="@/assets/images/svg/right.svg" alt="" />
         </button>
       </Swiper>

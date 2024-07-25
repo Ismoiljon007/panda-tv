@@ -28,6 +28,17 @@ export const useAuthStore = defineStore({
           this.token = response?.access_token;
           localStorage.setItem("token", this.token);
           window.location.href = "/";
+          if (response?.access_token) {
+            localStorage.setItem("access__token", response?.access_token);
+            useToast().success("profilingizga muvafaqiyatli kirdingiz", {
+              timeout: 2000,
+            });
+            window.location.href = "/";
+          } else {
+            useToast().warning(
+              "Kiritgan ko'dingizda xatolik bor yana bir bor urinib ko'ring!"
+            );
+          }
         })
         .catch((error) => {
           throw error;

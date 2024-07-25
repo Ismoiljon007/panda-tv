@@ -84,24 +84,7 @@ const bindModal = ref("");
 async function enterCode() {
   const info: string = `${sessionData.value?.browserName}, ${sessionData.value?.browserVersion}, ${sessionData.value?.operatingSystem}, ${sessionData.value?.screenHeight}, ${sessionData.value?.screenWidth}, ${sessionData.value?.timezone}`;
 
-  const data: any = await authStore.verificationCode(bindModal.value, info);
-  try {
-    if (data?.access_token) {
-      localStorage.setItem("access__token", data?.access_token);
-      useToast().success("profilingizga muvafaqiyatli kirdingiz", {
-        timeout: 2000,
-      });
-      window.location.href = "/";
-    } else {
-      useToast().warning(
-        "Kiritgan ko'dingizda xatolik bor yana bir bor urinib ko'ring!"
-      );
-    }
-  } catch (error) {
-    useToast().warning(
-      "Kiritgan ko'dingizda xatolik bor yana bir bor urinib ko'ring!"
-    );
-  }
+  await authStore.verificationCode(bindModal.value, info);
 }
 
 function startTimer(duration: number, display: { textContent: string }) {
